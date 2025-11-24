@@ -112,7 +112,7 @@ If you want to use GitHub Actions for automated deployment, the workflow file (`
 
 1. **SSH into your EC2 instance:**
    ```bash
-   ssh -i your-key.pem ec2-user@your-ec2-ip
+   ssh -i your-key.pem ubuntu@your-ec2-ip
    ```
 
 2. **Clone the repository:**

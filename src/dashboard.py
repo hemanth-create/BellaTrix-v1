@@ -639,7 +639,7 @@ st.markdown("""
     </p>
     <div style="margin-top: 1rem;">
         <span class="badge badge-success">Real-time Analytics</span>
-        <span class="badge badge-warning">Cost Optimization</span>
+        <span class="badge badge-warning">Cost BellaTrix-v1</span>
         <span class="badge badge-info">Multi-Model Comparison</span>
     </div>
 </div>

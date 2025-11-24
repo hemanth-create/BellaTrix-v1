@@ -16,7 +16,7 @@ Complete guide to deploy the BellaTrix application to EC2 at `http://43.204.142.
 ### Step 1: SSH into EC2 Instance
 
 ```bash
-ssh -i your-key.pem ec2-user@43.204.142.218
+ssh -i your-key.pem ubuntu@43.204.142.218
 ```
 
 **Note:** Replace `your-key.pem` with your actual SSH key file.
@@ -69,9 +69,9 @@ sudo apt install gh
 ### Step 3: Clone Repository
 
 ```bash
-cd /home/ec2-user
-git clone https://github.com/infofitsoftwaresolution/Optimization.git
-cd Optimization
+cd /home/ubuntu
+git clone https://github.com/infofitsoftwaresolution/BellaTrix-v1.git
+cd BellaTrix-v1
 ```
 
 ---
@@ -133,7 +133,7 @@ pip install -r requirements.txt
 
 ```bash
 # Copy nginx configuration
-sudo cp nginx-optimization-app.conf /etc/nginx/conf.d/optimization-app.conf
+sudo cp nginx-BellaTrix-v1-app.conf /etc/nginx/conf.d/BellaTrix-v1-app.conf
 
 # Test nginx configuration
 sudo nginx -t
@@ -153,19 +153,19 @@ sudo systemctl enable nginx
 
 ```bash
 # Copy systemd service file
-sudo cp streamlit-optimization.service /etc/systemd/system/
+sudo cp streamlit-BellaTrix-v1.service /etc/systemd/system/
 
 # Reload systemd
 sudo systemctl daemon-reload
 
 # Enable service to start on boot
-sudo systemctl enable streamlit-optimization.service
+sudo systemctl enable streamlit-BellaTrix-v1.service
 
 # Start the service
-sudo systemctl start streamlit-optimization.service
+sudo systemctl start streamlit-BellaTrix-v1.service
 
 # Check status
-sudo systemctl status streamlit-optimization.service
+sudo systemctl status streamlit-BellaTrix-v1.service
 ```
 
 ---
@@ -174,7 +174,7 @@ sudo systemctl status streamlit-optimization.service
 
 ```bash
 # Check Streamlit service
-sudo systemctl status streamlit-optimization.service
+sudo systemctl status streamlit-BellaTrix-v1.service
 
 # Check Nginx service
 sudo systemctl status nginx
@@ -183,7 +183,7 @@ sudo systemctl status nginx
 curl http://localhost:8501
 
 # Check logs if needed
-sudo journalctl -u streamlit-optimization.service -f
+sudo journalctl -u streamlit-BellaTrix-v1.service -f
 ```
 
 ---
@@ -204,7 +204,7 @@ You should see the landing page with sign up/sign in options.
 ### Quick Update (Recommended)
 
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 chmod +x scripts/quick-deploy.sh
 ./scripts/quick-deploy.sh
 ```
@@ -212,7 +212,7 @@ chmod +x scripts/quick-deploy.sh
 ### Full Deployment
 
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 chmod +x scripts/deploy.sh
 ./scripts/deploy.sh
 ```
@@ -220,7 +220,7 @@ chmod +x scripts/deploy.sh
 ### Manual Update
 
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 
 # Pull latest code
 git pull origin main
@@ -230,10 +230,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 # Restart service
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 
 # Check status
-sudo systemctl status streamlit-optimization.service
+sudo systemctl status streamlit-BellaTrix-v1.service
 ```
 
 ---
@@ -244,13 +244,13 @@ sudo systemctl status streamlit-optimization.service
 
 ```bash
 # Check logs
-sudo journalctl -u streamlit-optimization.service -n 50
+sudo journalctl -u streamlit-BellaTrix-v1.service -n 50
 
 # Check if port is in use
 sudo netstat -tulpn | grep 8501
 
 # Verify .env file exists
-ls -la /home/ec2-user/Optimization/.env
+ls -la /home/ubuntu/BellaTrix-v1/.env
 ```
 
 ### Issue: Can't access from browser
@@ -267,7 +267,7 @@ ls -la /home/ec2-user/Optimization/.env
 
 3. **Check Streamlit:**
    ```bash
-   sudo systemctl status streamlit-optimization.service
+   sudo systemctl status streamlit-BellaTrix-v1.service
    curl http://localhost:8501
    ```
 
@@ -275,13 +275,13 @@ ls -la /home/ec2-user/Optimization/.env
 
 ```bash
 # Verify .env file
-cat /home/ec2-user/Optimization/.env
+cat /home/ubuntu/BellaTrix-v1/.env
 
 # Check file permissions
-ls -la /home/ec2-user/Optimization/.env
+ls -la /home/ubuntu/BellaTrix-v1/.env
 
 # Re-run setup script
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 ./scripts/setup-from-github-secrets.sh
 ```
 
@@ -295,7 +295,7 @@ sudo lsof -i :8501
 sudo kill -9 PID
 
 # Or restart the service
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 ```
 
 ---
@@ -305,19 +305,19 @@ sudo systemctl restart streamlit-optimization.service
 ### Service Management
 ```bash
 # Start service
-sudo systemctl start streamlit-optimization.service
+sudo systemctl start streamlit-BellaTrix-v1.service
 
 # Stop service
-sudo systemctl stop streamlit-optimization.service
+sudo systemctl stop streamlit-BellaTrix-v1.service
 
 # Restart service
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 
 # Check status
-sudo systemctl status streamlit-optimization.service
+sudo systemctl status streamlit-BellaTrix-v1.service
 
 # View logs
-sudo journalctl -u streamlit-optimization.service -f
+sudo journalctl -u streamlit-BellaTrix-v1.service -f
 ```
 
 ### Nginx Management
@@ -341,7 +341,7 @@ sudo nginx -t
 ### View Logs
 ```bash
 # Streamlit logs
-sudo journalctl -u streamlit-optimization.service -n 100
+sudo journalctl -u streamlit-BellaTrix-v1.service -n 100
 
 # Nginx access logs
 sudo tail -f /var/log/nginx/access.log

@@ -362,7 +362,7 @@ Final score = (Cosine × 0.5) + (Jaccard × 0.3) + (Levenshtein × 0.2)
 ## 🗂️ Project Structure
 
 ```
-Optimization/
+BellaTrix-v1/
 ├── src/                    # Source code
 │   ├── dashboard.py        # Streamlit dashboard
 │   ├── evaluator.py        # Model evaluation logic
@@ -493,7 +493,7 @@ If you continue to experience issues, please check:
 
 This project includes automated CI/CD deployment to EC2 using GitHub Actions.
 
-**Repository:** https://github.com/infofitsoftwaresolution/Optimization
+**Repository:** https://github.com/infofitsoftwaresolution/BellaTrix-v1
 
 For deployment details, see:
 - [DEPLOYMENT.md](DEPLOYMENT.md) - Deployment guide

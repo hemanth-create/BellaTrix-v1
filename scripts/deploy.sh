@@ -4,7 +4,7 @@ set -e
 
 echo " Starting automated deployment..."
 
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 
 # Pull latest changes
 echo " Pulling latest code from GitHub..."
@@ -17,18 +17,18 @@ pip3 install -r requirements.txt
 
 # Restart the Streamlit service
 echo " Restarting Streamlit service..."
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 
 # Wait for service to start
 echo "⏳ Waiting for service to start..."
 sleep 10
 
 # Check service status
-if sudo systemctl is-active --quiet streamlit-optimization.service; then
+if sudo systemctl is-active --quiet streamlit-BellaTrix-v1.service; then
     echo " Streamlit service is running"
 else
     echo " Streamlit service failed to start"
-    sudo systemctl status streamlit-optimization.service
+    sudo systemctl status streamlit-BellaTrix-v1.service
     exit 1
 fi
 
@@ -47,7 +47,7 @@ done
 
 echo " Health check failed after 10 attempts"
 echo " Service status:"
-sudo systemctl status streamlit-optimization.service
+sudo systemctl status streamlit-BellaTrix-v1.service
 echo " Recent logs:"
-sudo journalctl -u streamlit-optimization.service -n 20 --no-pager
+sudo journalctl -u streamlit-BellaTrix-v1.service -n 20 --no-pager
 exit 1

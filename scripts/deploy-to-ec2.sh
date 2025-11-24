@@ -5,7 +5,7 @@
 set -e
 
 EC2_IP="43.204.142.218"
-PROJECT_DIR="/home/ec2-user/Optimization"
+PROJECT_DIR="/home/ubuntu/BellaTrix-v1"
 
 echo "========================================"
 echo "🚀 Deploying to EC2: $EC2_IP"
@@ -16,7 +16,7 @@ echo ""
 if [ ! -d "$PROJECT_DIR" ]; then
     echo "❌ Error: Project directory not found: $PROJECT_DIR"
     echo "   This script should be run on the EC2 instance."
-    echo "   Please SSH into EC2 first: ssh -i your-key.pem ec2-user@$EC2_IP"
+    echo "   Please SSH into EC2 first: ssh -i your-key.pem ubuntu@$EC2_IP"
     exit 1
 fi
 
@@ -63,8 +63,8 @@ echo ""
 
 # Step 5: Configure Nginx
 echo "🌐 Step 5: Configuring Nginx..."
-if [ -f "nginx-optimization-app.conf" ]; then
-    sudo cp nginx-optimization-app.conf /etc/nginx/conf.d/optimization-app.conf
+if [ -f "nginx-BellaTrix-v1-app.conf" ]; then
+    sudo cp nginx-BellaTrix-v1-app.conf /etc/nginx/conf.d/BellaTrix-v1-app.conf
     sudo nginx -t && {
         sudo systemctl restart nginx
         sudo systemctl enable nginx
@@ -73,25 +73,25 @@ if [ -f "nginx-optimization-app.conf" ]; then
         echo "⚠️  Warning: Nginx configuration test failed"
     }
 else
-    echo "⚠️  Warning: nginx-optimization-app.conf not found"
+    echo "⚠️  Warning: nginx-BellaTrix-v1-app.conf not found"
 fi
 echo ""
 
 # Step 6: Set up systemd service
 echo "⚙️  Step 6: Setting up systemd service..."
-if [ -f "streamlit-optimization.service" ]; then
-    sudo cp streamlit-optimization.service /etc/systemd/system/
+if [ -f "streamlit-BellaTrix-v1.service" ]; then
+    sudo cp streamlit-BellaTrix-v1.service /etc/systemd/system/
     sudo systemctl daemon-reload
-    sudo systemctl enable streamlit-optimization.service
+    sudo systemctl enable streamlit-BellaTrix-v1.service
     echo "✅ Systemd service configured"
 else
-    echo "⚠️  Warning: streamlit-optimization.service not found"
+    echo "⚠️  Warning: streamlit-BellaTrix-v1.service not found"
 fi
 echo ""
 
 # Step 7: Restart Streamlit service
 echo "🔄 Step 7: Restarting Streamlit service..."
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 sleep 5
 echo "✅ Service restarted"
 echo ""
@@ -106,7 +106,7 @@ for i in {1..10}; do
     if [ $i -eq 10 ]; then
         echo "❌ Health check failed after 10 attempts"
         echo "   Checking service status..."
-        sudo systemctl status streamlit-optimization.service --no-pager -l
+        sudo systemctl status streamlit-BellaTrix-v1.service --no-pager -l
         exit 1
     fi
     echo "   Attempt $i/10 failed, retrying..."
@@ -122,11 +122,11 @@ echo ""
 echo "🌐 Application URL: http://$EC2_IP/"
 echo ""
 echo "📊 Service Status:"
-sudo systemctl status streamlit-optimization.service --no-pager -l | head -10
+sudo systemctl status streamlit-BellaTrix-v1.service --no-pager -l | head -10
 echo ""
 echo "📝 Useful commands:"
-echo "   View logs:    sudo journalctl -u streamlit-optimization.service -f"
-echo "   Restart:      sudo systemctl restart streamlit-optimization.service"
-echo "   Status:       sudo systemctl status streamlit-optimization.service"
+echo "   View logs:    sudo journalctl -u streamlit-BellaTrix-v1.service -f"
+echo "   Restart:      sudo systemctl restart streamlit-BellaTrix-v1.service"
+echo "   Status:       sudo systemctl status streamlit-BellaTrix-v1.service"
 echo ""
 

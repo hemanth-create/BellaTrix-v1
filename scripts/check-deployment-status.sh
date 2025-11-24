@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script to check deployment status and diagnose issues
 
-PROJECT_DIR="/home/ec2-user/Optimization"
+PROJECT_DIR="/home/ubuntu/BellaTrix-v1"
 
 echo "========================================"
 echo "🔍 Deployment Status Check"
@@ -64,18 +64,18 @@ echo ""
 
 # 5. Check Streamlit service
 echo "⚙️  Streamlit Service:"
-if sudo systemctl is-active --quiet streamlit-optimization.service; then
+if sudo systemctl is-active --quiet streamlit-BellaTrix-v1.service; then
     echo "   ✅ Service is running"
-    echo "   Status: $(sudo systemctl is-active streamlit-optimization.service)"
+    echo "   Status: $(sudo systemctl is-active streamlit-BellaTrix-v1.service)"
 else
     echo "   ❌ Service is not running!"
-    echo "   Status: $(sudo systemctl is-active streamlit-optimization.service)"
+    echo "   Status: $(sudo systemctl is-active streamlit-BellaTrix-v1.service)"
 fi
 
 # Get service status
 echo ""
 echo "   Service details:"
-sudo systemctl status streamlit-optimization.service --no-pager -l | head -10
+sudo systemctl status streamlit-BellaTrix-v1.service --no-pager -l | head -10
 echo ""
 
 # 6. Check if port 8501 is listening
@@ -114,7 +114,7 @@ echo ""
 
 # 9. Check recent logs for errors
 echo "📋 Recent Logs (last 5 lines):"
-sudo journalctl -u streamlit-optimization.service -n 5 --no-pager | tail -5
+sudo journalctl -u streamlit-BellaTrix-v1.service -n 5 --no-pager | tail -5
 echo ""
 
 # 10. Summary
@@ -131,10 +131,10 @@ fi
 if [ ! -f ".env" ]; then
     echo "   2. Set up environment: ./scripts/setup-from-github-secrets.sh"
 fi
-if ! sudo systemctl is-active --quiet streamlit-optimization.service; then
-    echo "   3. Start service: sudo systemctl start streamlit-optimization.service"
+if ! sudo systemctl is-active --quiet streamlit-BellaTrix-v1.service; then
+    echo "   3. Start service: sudo systemctl start streamlit-BellaTrix-v1.service"
 fi
-echo "   4. View logs: sudo journalctl -u streamlit-optimization.service -f"
+echo "   4. View logs: sudo journalctl -u streamlit-BellaTrix-v1.service -f"
 echo "   5. Clear browser cache if changes not visible"
 echo ""
 

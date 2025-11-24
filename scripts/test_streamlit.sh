@@ -1,7 +1,7 @@
 #!/bin/bash
 # Test script to diagnose Streamlit startup issues
 
-PROJECT_DIR="/home/ec2-user/Optimization"
+PROJECT_DIR="/home/ubuntu/BellaTrix-v1"
 cd "$PROJECT_DIR"
 
 echo "=== Streamlit Diagnostic Test ==="

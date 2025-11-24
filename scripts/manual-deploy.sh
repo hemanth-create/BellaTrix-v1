@@ -2,7 +2,7 @@
 
 echo " Starting manual deployment..."
 
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 
 # Pull latest code
 echo " Pulling latest code..."
@@ -51,10 +51,10 @@ done
 if pgrep -f "streamlit run" > /dev/null; then
     echo " Deployment completed!"
     echo "🌐 App is available at: http://3.111.36.145"
-    echo " Logs: tail -f /home/ec2-user/Optimization/dashboard.log"
+    echo " Logs: tail -f /home/ubuntu/BellaTrix-v1/dashboard.log"
     echo " Process ID: $(pgrep -f 'streamlit run')"
 else
     echo " Deployment failed - Streamlit process not found"
-    echo " Check logs: tail -f /home/ec2-user/Optimization/dashboard.log"
+    echo " Check logs: tail -f /home/ubuntu/BellaTrix-v1/dashboard.log"
     exit 1
 fi

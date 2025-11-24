@@ -1,15 +1,15 @@
 [Unit]
-Description=Streamlit Optimization App
+Description=Streamlit BellaTrix-v1 App
 After=network.target
 
 [Service]
 Type=simple
-User=ec2-user
-Group=ec2-user
-WorkingDirectory=/home/ec2-user/Optimization
-Environment=PATH=/home/ec2-user/Optimization/.venv/bin:/home/ec2-user/.local/bin:/usr/local/bin:/usr/bin:/bin
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/BellaTrix-v1
+Environment=PATH=/home/ubuntu/BellaTrix-v1/.venv/bin:/home/ubuntu/.local/bin:/usr/local/bin:/usr/bin:/bin
 # Use wrapper script that loads GitHub Secrets
-ExecStart=/home/ec2-user/Optimization/scripts/start-streamlit-with-secrets.sh
+ExecStart=/home/ubuntu/BellaTrix-v1/scripts/start-streamlit-with-secrets.sh
 Restart=always
 RestartSec=10
 StandardOutput=journal

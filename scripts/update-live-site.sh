@@ -4,7 +4,7 @@
 
 set -e
 
-PROJECT_DIR="/home/ec2-user/Optimization"
+PROJECT_DIR="/home/ubuntu/BellaTrix-v1"
 
 echo "========================================"
 echo "🔄 Updating Live Site"
@@ -65,19 +65,19 @@ echo ""
 
 # Step 5: Restart Streamlit service
 echo "🔄 Step 5: Restarting Streamlit service..."
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 sleep 5
 echo "✅ Service restarted"
 echo ""
 
 # Step 6: Check service status
 echo "📊 Step 6: Checking service status..."
-if sudo systemctl is-active --quiet streamlit-optimization.service; then
+if sudo systemctl is-active --quiet streamlit-BellaTrix-v1.service; then
     echo "✅ Service is running"
 else
     echo "❌ Service is not running!"
     echo "   Checking logs..."
-    sudo journalctl -u streamlit-optimization.service -n 20 --no-pager
+    sudo journalctl -u streamlit-BellaTrix-v1.service -n 20 --no-pager
     exit 1
 fi
 echo ""
@@ -113,11 +113,11 @@ echo ""
 echo "🌐 Application URL: http://43.204.142.218/"
 echo ""
 echo "📊 Service Status:"
-sudo systemctl status streamlit-optimization.service --no-pager -l | head -15
+sudo systemctl status streamlit-BellaTrix-v1.service --no-pager -l | head -15
 echo ""
 echo "💡 If changes are not visible:"
 echo "   1. Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)"
 echo "   2. Try incognito/private browsing mode"
-echo "   3. Check logs: sudo journalctl -u streamlit-optimization.service -f"
+echo "   3. Check logs: sudo journalctl -u streamlit-BellaTrix-v1.service -f"
 echo ""
 

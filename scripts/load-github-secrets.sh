@@ -5,9 +5,9 @@
 # Check if GitHub CLI is available
 if ! command -v gh &> /dev/null; then
     echo "GitHub CLI not found. Falling back to .env file if exists."
-    if [ -f "/home/ec2-user/Optimization/.env" ]; then
+    if [ -f "/home/ubuntu/BellaTrix-v1/.env" ]; then
         set -a
-        source /home/ec2-user/Optimization/.env
+        source /home/ubuntu/BellaTrix-v1/.env
         set +a
     fi
     return 0
@@ -16,9 +16,9 @@ fi
 # Check if authenticated
 if ! gh auth status &> /dev/null; then
     echo "Not authenticated with GitHub. Falling back to .env file if exists."
-    if [ -f "/home/ec2-user/Optimization/.env" ]; then
+    if [ -f "/home/ubuntu/BellaTrix-v1/.env" ]; then
         set -a
-        source /home/ec2-user/Optimization/.env
+        source /home/ubuntu/BellaTrix-v1/.env
         set +a
     fi
     return 0

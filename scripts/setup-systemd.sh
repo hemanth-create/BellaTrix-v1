@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Systemd Service Setup Script for Streamlit Optimization App
+# Systemd Service Setup Script for Streamlit BellaTrix-v1 App
 # This script sets up Streamlit as a systemd service for automatic restarts
 
 set -e
 
-echo " Setting up systemd service for Streamlit Optimization App..."
+echo " Setting up systemd service for Streamlit BellaTrix-v1 App..."
 
 # Check if running as root or with sudo
 if [ "$EUID" -ne 0 ]; then 
@@ -14,8 +14,8 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-PROJECT_DIR="/home/ec2-user/Optimization"
-SERVICE_FILE="/etc/systemd/system/streamlit-optimization.service"
+PROJECT_DIR="/home/ubuntu/BellaTrix-v1"
+SERVICE_FILE="/etc/systemd/system/streamlit-BellaTrix-v1.service"
 
 # Check if project directory exists
 if [ ! -d "$PROJECT_DIR" ]; then
@@ -24,14 +24,14 @@ if [ ! -d "$PROJECT_DIR" ]; then
 fi
 
 # Check if service file exists in project
-if [ ! -f "$PROJECT_DIR/streamlit-optimization.service" ]; then
-    echo " Service file not found: $PROJECT_DIR/streamlit-optimization.service"
+if [ ! -f "$PROJECT_DIR/streamlit-BellaTrix-v1.service" ]; then
+    echo " Service file not found: $PROJECT_DIR/streamlit-BellaTrix-v1.service"
     exit 1
 fi
 
 # Copy service file
 echo " Copying service file..."
-cp "$PROJECT_DIR/streamlit-optimization.service" "$SERVICE_FILE"
+cp "$PROJECT_DIR/streamlit-BellaTrix-v1.service" "$SERVICE_FILE"
 
 # Reload systemd
 echo " Reloading systemd daemon..."
@@ -39,15 +39,15 @@ systemctl daemon-reload
 
 # Enable service (start on boot)
 echo " Enabling service (will start on boot)..."
-systemctl enable streamlit-optimization.service
+systemctl enable streamlit-BellaTrix-v1.service
 
 # Check if service is already running
-if systemctl is-active --quiet streamlit-optimization.service; then
+if systemctl is-active --quiet streamlit-BellaTrix-v1.service; then
     echo "  Service is already running. Restarting..."
-    systemctl restart streamlit-optimization.service
+    systemctl restart streamlit-BellaTrix-v1.service
 else
     echo " Starting service..."
-    systemctl start streamlit-optimization.service
+    systemctl start streamlit-BellaTrix-v1.service
 fi
 
 # Wait a moment
@@ -56,16 +56,16 @@ sleep 3
 # Check status
 echo ""
 echo " Service Status:"
-systemctl status streamlit-optimization.service --no-pager -l
+systemctl status streamlit-BellaTrix-v1.service --no-pager -l
 
 echo ""
 echo " Systemd service setup complete!"
 echo ""
 echo " Useful commands:"
-echo "   Start:   sudo systemctl start streamlit-optimization.service"
-echo "   Stop:    sudo systemctl stop streamlit-optimization.service"
-echo "   Restart: sudo systemctl restart streamlit-optimization.service"
-echo "   Status:  sudo systemctl status streamlit-optimization.service"
-echo "   Logs:    sudo journalctl -u streamlit-optimization.service -f"
+echo "   Start:   sudo systemctl start streamlit-BellaTrix-v1.service"
+echo "   Stop:    sudo systemctl stop streamlit-BellaTrix-v1.service"
+echo "   Restart: sudo systemctl restart streamlit-BellaTrix-v1.service"
+echo "   Status:  sudo systemctl status streamlit-BellaTrix-v1.service"
+echo "   Logs:    sudo journalctl -u streamlit-BellaTrix-v1.service -f"
 echo ""
 

@@ -6,7 +6,7 @@
 set +e
 
 # Get the project directory from the current working directory or use default
-PROJECT_DIR="${1:-/home/ec2-user/Optimization}"
+PROJECT_DIR="${1:-/home/ubuntu/BellaTrix-v1}"
 
 # Change to project directory
 cd "$PROJECT_DIR" || {

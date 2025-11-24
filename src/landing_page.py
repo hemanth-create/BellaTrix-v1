@@ -364,7 +364,7 @@ def render_landing_page():
             </div>
             <div class="feature-card">
                 <span class="feature-icon">💰</span>
-                <h3 class="feature-title">Cost Optimization</h3>
+                <h3 class="feature-title">Cost BellaTrix-v1</h3>
                 <p class="feature-description">
                     Track token usage and costs in real-time. Identify the most 
                     cost-effective models for your use case.

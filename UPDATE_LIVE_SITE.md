@@ -7,7 +7,7 @@ If your changes are not showing on the hosted site at `http://43.204.142.218/`, 
 SSH into your EC2 instance and run:
 
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 chmod +x scripts/update-live-site.sh
 ./scripts/update-live-site.sh
 ```
@@ -26,7 +26,7 @@ This script will:
 First, check what's happening:
 
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 chmod +x scripts/check-deployment-status.sh
 ./scripts/check-deployment-status.sh
 ```
@@ -46,12 +46,12 @@ If the script doesn't work, do it manually:
 
 ### Step 1: SSH into EC2
 ```bash
-ssh -i your-key.pem ec2-user@43.204.142.218
+ssh -i your-key.pem ubuntu@43.204.142.218
 ```
 
 ### Step 2: Navigate to project
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 ```
 
 ### Step 3: Pull latest code
@@ -73,12 +73,12 @@ pip install -r requirements.txt
 
 ### Step 6: Restart Streamlit service
 ```bash
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 ```
 
 ### Step 7: Check service status
 ```bash
-sudo systemctl status streamlit-optimization.service
+sudo systemctl status streamlit-BellaTrix-v1.service
 ```
 
 ### Step 8: Restart Nginx (clear cache)
@@ -103,25 +103,25 @@ curl http://localhost:8501
 
 2. **Check if service restarted:**
    ```bash
-   sudo systemctl status streamlit-optimization.service
+   sudo systemctl status streamlit-BellaTrix-v1.service
    ```
 
 3. **Check logs for errors:**
    ```bash
-   sudo journalctl -u streamlit-optimization.service -n 50
+   sudo journalctl -u streamlit-BellaTrix-v1.service -n 50
    ```
 
 4. **Verify code was pulled:**
    ```bash
-   cd /home/ec2-user/Optimization
+   cd /home/ubuntu/BellaTrix-v1
    git log -1 --oneline
    ```
 
 5. **Force restart everything:**
    ```bash
-   sudo systemctl stop streamlit-optimization.service
+   sudo systemctl stop streamlit-BellaTrix-v1.service
    sleep 2
-   sudo systemctl start streamlit-optimization.service
+   sudo systemctl start streamlit-BellaTrix-v1.service
    sudo systemctl restart nginx
    ```
 
@@ -129,16 +129,16 @@ curl http://localhost:8501
 
 ```bash
 # Check logs
-sudo journalctl -u streamlit-optimization.service -n 50
+sudo journalctl -u streamlit-BellaTrix-v1.service -n 50
 
 # Check if port is in use
 sudo lsof -i :8501
 
 # Check if virtual environment exists
-ls -la /home/ec2-user/Optimization/.venv
+ls -la /home/ubuntu/BellaTrix-v1/.venv
 
 # Check if streamlit is installed
-/home/ec2-user/Optimization/.venv/bin/streamlit --version
+/home/ubuntu/BellaTrix-v1/.venv/bin/streamlit --version
 ```
 
 ### Issue: Code not pulling from GitHub
@@ -159,7 +159,7 @@ git reset --hard origin/main
 
 ```bash
 # Re-run setup script
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 ./scripts/setup-from-github-secrets.sh
 
 # Or manually check .env
@@ -172,13 +172,13 @@ cat .env
 
 ```bash
 # View live logs
-sudo journalctl -u streamlit-optimization.service -f
+sudo journalctl -u streamlit-BellaTrix-v1.service -f
 
 # Restart service
-sudo systemctl restart streamlit-optimization.service
+sudo systemctl restart streamlit-BellaTrix-v1.service
 
 # Check service status
-sudo systemctl status streamlit-optimization.service
+sudo systemctl status streamlit-BellaTrix-v1.service
 
 # Check if app is responding
 curl http://localhost:8501
@@ -201,7 +201,7 @@ After updating, verify:
 - [ ] Port 8501 is listening (`curl http://localhost:8501`)
 - [ ] Nginx is running (`sudo systemctl status nginx`)
 - [ ] Can access from browser (clear cache first)
-- [ ] No errors in logs (`sudo journalctl -u streamlit-optimization.service -n 20`)
+- [ ] No errors in logs (`sudo journalctl -u streamlit-BellaTrix-v1.service -n 20`)
 
 ---
 
@@ -216,7 +216,7 @@ If nothing works:
 
 2. **View full logs:**
    ```bash
-   sudo journalctl -u streamlit-optimization.service -n 100
+   sudo journalctl -u streamlit-BellaTrix-v1.service -n 100
    ```
 
 3. **Re-run full deployment:**

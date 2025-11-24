@@ -4,7 +4,7 @@
 
 echo " Verifying Streamlit deployment..."
 
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 
 echo ""
 echo "1. Checking if Streamlit process is running:"

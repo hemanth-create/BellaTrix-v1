@@ -5,7 +5,7 @@
 
 set -e  # Exit on error
 
-cd /home/ec2-user/Optimization || {
+cd /home/ubuntu/BellaTrix-v1 || {
     echo " Failed to change to project directory"
     exit 1
 }
@@ -27,7 +27,7 @@ echo " Starting Streamlit with setsid..."
 
 # Start Streamlit using setsid to detach from terminal
 # This ensures it runs even if the parent process exits
-setsid bash -c "cd /home/ec2-user/Optimization && export PATH=\"\$HOME/.local/bin:\$PATH\" && python3 -m streamlit run src/dashboard.py --server.port 8501 --server.address 0.0.0.0 --server.headless true --server.runOnSave false --browser.serverAddress 0.0.0.0 --browser.gatherUsageStats false" > dashboard.log 2>&1 &
+setsid bash -c "cd /home/ubuntu/BellaTrix-v1 && export PATH=\"\$HOME/.local/bin:\$PATH\" && python3 -m streamlit run src/dashboard.py --server.port 8501 --server.address 0.0.0.0 --server.headless true --server.runOnSave false --browser.serverAddress 0.0.0.0 --browser.gatherUsageStats false" > dashboard.log 2>&1 &
 
 # Get the PID of the setsid process
 SETSID_PID=$!

@@ -6,12 +6,12 @@
 
 ```bash
 # SSH into EC2
-ssh -i your-key.pem ec2-user@43.204.142.218
+ssh -i your-key.pem ubuntu@43.204.142.218
 
 # Clone repository (first time only)
-cd /home/ec2-user
-git clone https://github.com/infofitsoftwaresolution/Optimization.git
-cd Optimization
+cd /home/ubuntu
+git clone https://github.com/infofitsoftwaresolution/BellaTrix-v1.git
+cd BellaTrix-v1
 
 # Run deployment script
 chmod +x scripts/deploy-to-ec2.sh
@@ -32,14 +32,14 @@ That's it! The script will:
 ## 🔄 Quick Update (After Initial Deployment)
 
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 ./scripts/deploy-to-ec2.sh
 ```
 
 Or use the quick deploy script:
 
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 ./scripts/quick-deploy.sh
 ```
 
@@ -62,7 +62,7 @@ After deployment, check:
 
 1. **Service Status:**
    ```bash
-   sudo systemctl status streamlit-optimization.service
+   sudo systemctl status streamlit-BellaTrix-v1.service
    ```
 
 2. **Access Application:**
@@ -70,7 +70,7 @@ After deployment, check:
 
 3. **View Logs:**
    ```bash
-   sudo journalctl -u streamlit-optimization.service -f
+   sudo journalctl -u streamlit-BellaTrix-v1.service -f
    ```
 
 ---
@@ -79,17 +79,17 @@ After deployment, check:
 
 ### Service won't start?
 ```bash
-sudo journalctl -u streamlit-optimization.service -n 50
+sudo journalctl -u streamlit-BellaTrix-v1.service -n 50
 ```
 
 ### Can't access from browser?
 1. Check Security Group (port 80 open)
 2. Check Nginx: `sudo systemctl status nginx`
-3. Check Streamlit: `sudo systemctl status streamlit-optimization.service`
+3. Check Streamlit: `sudo systemctl status streamlit-BellaTrix-v1.service`
 
 ### Environment variables missing?
 ```bash
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 ./scripts/setup-from-github-secrets.sh
 ```
 

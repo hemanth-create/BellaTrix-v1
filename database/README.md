@@ -156,7 +156,7 @@ Implement data archiving strategy:
 - Compress historical data
 - Maintain summary statistics
 
-### Query Optimization
+### Query BellaTrix-v1
 
 - Use views for common aggregations
 - Leverage materialized views for heavy calculations

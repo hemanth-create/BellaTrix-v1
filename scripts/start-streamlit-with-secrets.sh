@@ -1,7 +1,7 @@
 #!/bin/bash
 # Wrapper script to start Streamlit with GitHub Secrets or .env file loaded as environment variables
 
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 
 # Try to load GitHub Secrets first
 if [ -f "scripts/load-github-secrets.sh" ]; then
@@ -16,7 +16,7 @@ if [ -f ".env" ]; then
 fi
 
 # Start Streamlit with the loaded environment variables
-exec /home/ec2-user/Optimization/.venv/bin/streamlit run src/dashboard.py \
+exec /home/ubuntu/BellaTrix-v1/.venv/bin/streamlit run src/dashboard.py \
     --server.port 8501 \
     --server.address 0.0.0.0 \
     --server.headless true \

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fallback script to start Streamlit manually
-cd /home/ec2-user/Optimization
+cd /home/ubuntu/BellaTrix-v1
 export PATH="$HOME/.local/bin:$PATH"
 
 # Kill any existing processes

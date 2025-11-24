@@ -3,7 +3,7 @@
 case "$1" in
     start)
         echo "Starting Streamlit app..."
-        cd /home/ec2-user/Optimization
+        cd /home/ubuntu/BellaTrix-v1
         export PATH="$HOME/.local/bin:$PATH"
         nohup python3 -m streamlit run src/dashboard.py \
           --server.port 8501 \
