@@ -1,0 +1,110 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Create .env file from secrets
+      run: |
+        cat > .env << EOF
+        # AWS Configuration
+        AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION=${{ secrets.AWS_REGION }}
+        
+        # Database Configuration
+        DB_HOST=${{ secrets.DB_HOST }}
+        DB_PORT=${{ secrets.DB_PORT }}
+        DB_NAME=${{ secrets.DB_NAME }}
+        DB_USER=${{ secrets.DB_USER }}
+        DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+        
+        # OpenAI API Key (Optional)
+        OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+        
+        # Streamlit Configuration
+        STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+        EOF
+    
+    - name: Deploy .env file to EC2
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: ".env"
+        target: "/home/ec2-user/Optimization/"
+        strip_components: 0
+
+    - name: Set permissions, update service, and restart
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          chmod 600 /home/ec2-user/Optimization/.env
+          cd /home/ec2-user/Optimization
+          git pull origin main || true
+          
+          # Validate Python syntax before restarting
+          echo "🔍 Validating Python syntax..."
+          source .venv/bin/activate || true
+          python3 -m py_compile src/dashboard.py
+          if [ $? -eq 0 ]; then
+            echo "✅ Syntax validation passed"
+          else
+            echo "❌ Syntax validation failed!"
+            exit 1
+          fi
+          
+          # Update systemd service file to use wrapper script
+          if [ -f "streamlit-optimization.service" ]; then
+            sudo cp streamlit-optimization.service /etc/systemd/system/
+            sudo systemctl daemon-reload
+            echo "✅ Updated systemd service file"
+          fi
+          
+          # Make sure wrapper script is executable
+          chmod +x scripts/start-streamlit-with-secrets.sh
+          
+          # Stop service first to ensure clean restart
+          sudo systemctl stop streamlit-optimization.service || true
+          sleep 2
+          
+          # Restart service
+          sudo systemctl start streamlit-optimization.service
+          sleep 3
+          
+          # Check service status
+          if sudo systemctl is-active --quiet streamlit-optimization.service; then
+            echo "✅ Service started successfully"
+          else
+            echo "❌ Service failed to start!"
+            sudo systemctl status streamlit-optimization.service --no-pager -l
+            exit 1
+          fi
+          
+          # Show service status
+          sudo systemctl status streamlit-optimization.service --no-pager -l | head -20

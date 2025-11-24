@@ -1,0 +1,20 @@
+[Unit]
+Description=Streamlit Optimization App
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/Optimization
+Environment=PATH=/home/ec2-user/Optimization/.venv/bin:/home/ec2-user/.local/bin:/usr/local/bin:/usr/bin:/bin
+# Use wrapper script that loads GitHub Secrets
+ExecStart=/home/ec2-user/Optimization/scripts/start-streamlit-with-secrets.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
